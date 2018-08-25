@@ -3,17 +3,29 @@
 import Vue from 'vue'
 import FastClick from 'fastclick'
 import VueRouter from 'vue-router'
+import Scroller from 'vue-scroller'
+
 import App from './App'
-import Home from './components/HelloFromVux'
+import Announcement from './components/Announcement'
+import Robot from './components/Robot'
 
 Vue.use(VueRouter)
+Vue.use(Scroller)
 
-const routes = [{
-  path: '/',
-  component: Home
+const routes = [
+  {
+    path:'/',
+    redirect: '/announcement'
+  },{
+  path: '/announcement',
+  component: Announcement
+  },{
+  path: '/robot',
+  component: Robot
 }]
 
 const router = new VueRouter({
+  mode: 'history',
   routes
 })
 
