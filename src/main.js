@@ -8,20 +8,30 @@ import Scroller from 'vue-scroller'
 import App from './App'
 import Announcement from './components/Announcement'
 import Robot from './components/Robot'
+import Home from './components/Home'
 
 Vue.use(VueRouter)
 Vue.use(Scroller)
 
+
+const serverName = ''
+const apiPrefix = serverName + ''
+
+
 const routes = [
   {
     path:'/',
-    redirect: '/announcement'
+    redirect: '/home'
   },{
   path: '/announcement',
   component: Announcement
   },{
   path: '/robot',
   component: Robot
+},{
+  path:'/home',
+  component:Home
+  
 }]
 
 const router = new VueRouter({
@@ -32,6 +42,9 @@ const router = new VueRouter({
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
+
+Vue.prototype.serverName = serverName
+Vue.prototype.apiPrefix = apiPrefix
 
 /* eslint-disable no-new */
 new Vue({

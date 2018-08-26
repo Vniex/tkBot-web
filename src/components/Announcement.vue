@@ -13,7 +13,7 @@
      <div >
     <group>
       <cell v-for="item in list" :title="'['+item.posted_at+'] '+item.title" :link="item.link" :is-link=true>
-        
+         <img slot="icon" width="20" style="display:block;margin-right:5px;" :src="item.logo">
       </cell>
      
     </group>
@@ -34,7 +34,16 @@ import { Tab, TabItem, Sticky, Divider, XButton,Group,Cell,AlertModule} from 'vu
 import axios from 'axios'
 
 const exchanges = () => [{"exchange_name":'所有',"exchange_id":-1}, 
-{"exchange_name":'Huobi',"exchange_id":108}, {"exchange_name":'AEX',"exchange_id":1351}, ]
+{"exchange_name":'Binance',"exchange_id":338},
+{"exchange_name":'Bitfinex',"exchange_id":126},
+{"exchange_name":'Huobi',"exchange_id":108},
+{"exchange_name":'OKEX',"exchange_id":1324},
+{"exchange_name":'ZB',"exchange_id":1356},
+{"exchange_name":'HADAX',"exchange_id":1434},
+ {"exchange_name":'AEX',"exchange_id":1351},
+ {"exchange_name":'Gateio',"exchange_id":1333},
+ {"exchange_name":'JEX',"exchange_id":1394},
+ {"exchange_name":'DEW',"exchange_id":1401}, ]
 
 
 
@@ -77,9 +86,7 @@ export default {
 
       fetchData(cb) {
         
-        // var url='http://120.78.158.126:5001/api/v1/announcement/'
-         var url='http://127.0.0.1:8888/api/v1/announcement/'
-        // url='http://localhost:3000/'
+        var url=this.apiPrefix+"/announcement/"
         axios({
               url: url,
               method: 'GET',
@@ -92,7 +99,7 @@ export default {
           }).then( res => {
             // debugger
               if (res.data.success){
-                var data = res.data.data.map((item) => {   //  有同事指出应该声明一个新变量来存储map的结果，这个建议我认为是对的。
+                var data = res.data.data.map((item) => {   
                 return {
                     ...item,
                     posted_at:this.dateFormat(item.posted_at)
